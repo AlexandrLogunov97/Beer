@@ -12,14 +12,13 @@ export const HIDE_BEER = 'HIDE_BEER';
 
 export const loadItems = (page, mode, options) => {
     return (dispatch, getState) => {
-        dispatch({ type: SET_PAGE, page: page });
+        if(page>0)
+         dispatch({ type: SET_PAGE, page: page });
         if (mode === LOAD_FILTERED_ITEMS)
             dispatch({ type: CREATE_FILTER });
         if (options===CLEAR_FILTER)
             dispatch({ type: CLEAR_FILTER });
-        console.log('Option: '+options);
         const state = getState();
-        console.log(state.pivasik.filterQuery);
         fetch(`https://api.punkapi.com/v2/beers?page=${state.pivasik.page}${state.pivasik.filterQuery}`)
             .then(response => response.json())
             .then(data => {

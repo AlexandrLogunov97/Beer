@@ -27,26 +27,6 @@ export default function pivasik(state = initialState, action) {
                 canNext: true
             });
         }
-        case actions.PREV_PAGE: {
-            let page = state.page;
-            if (page > 1)
-                page--;
-            return Object.assign({}, state, {
-                page: page,
-                canPrev: false,
-                canNext: false
-            });
-        }
-        case actions.NEXT_PAGE: {
-
-            let page = state.page;
-            page++;
-            return Object.assign({}, state, {
-                page: page,
-                canPrev: false,
-                canNext: false
-            });
-        }
         case actions.CLEAR_FILTER: {
             let values = [...state.filter];
             values[0] = {
@@ -131,7 +111,9 @@ export default function pivasik(state = initialState, action) {
         }
         case actions.SET_PAGE: {
             return Object.assign({}, state, {
-                page: action.page
+                page: action.page,
+                canPrev: false,
+                canNext: false
             });
         }
         case actions.SHOW_BEER: {

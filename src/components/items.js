@@ -5,7 +5,6 @@ import  Item  from './item';
 
 class Items extends Component {
     render() {
-        console.log(this.props.items);
         return (
             <div>
                 {
@@ -17,7 +16,6 @@ class Items extends Component {
         );
     }
 }
-
 export default connect(
     state => ({
        

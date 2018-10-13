@@ -30,9 +30,15 @@
     transform: rotate(360deg);
   }
 }
+.item{
+  border-top: 1px solid grey;
+}
+.item:hover{
+  background-color: lightblue;
+}
 .modal{
   border-radius: 10px;
-  position: absolute;
+  position: fixed;
   display: none;
   left: 20%;
   color: white;
