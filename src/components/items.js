@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadItems } from '../reducers/actions';
 import  Item  from './item';
 
 class Items extends Component {

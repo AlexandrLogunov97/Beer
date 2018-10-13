@@ -9,7 +9,6 @@ const initialState = {
     filterQuery: '',
     selectedItem: {},
     modalState: false,
-    mode: 'items'
 }
 export default function pivasik(state = initialState, action) {
     switch (action.type) {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Filter from './components/filter';
 import Items from './components/items';
 import Pivasik from './components/pivasik';
-import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
 import { loadItems,loadRandomItem, CLEAR_FILTER, LOAD_ITEMS, LOAD_FILTERED_ITEMS } from './reducers/actions';
@@ -42,7 +41,6 @@ export default connect(
     page: state.pivasik.page,
     canPrev: state.pivasik.canPrev,
     canNext: state.pivasik.canNext,
-    mode: state.pivasik.mode,
     query: state.pivasik.filterQuery
   }),
   dispatch => ({
