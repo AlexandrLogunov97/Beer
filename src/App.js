@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Filter from './components/filter';
 import Items from './components/items';
-import { Pivasik } from './components/pivasik';
+import Pivasik from './components/pivasik';
 import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
-import { loadItems, loadFilteredItems, PREV_PAGE, NEXT_PAGE, CLEAR_FILTER } from './reducers/actions';
+import { loadItems,loadRandomItem, CLEAR_FILTER, LOAD_ITEMS, LOAD_FILTERED_ITEMS } from './reducers/actions';
 
 class App extends Component {
   componentWillMount() {
@@ -16,9 +16,10 @@ class App extends Component {
     return (
       <div>
         <Filter />
+        <button onClick={()=>this.props.randomBeer()}>Random beer</button>
         <Items items={this.props.items} />
         <button disabled={!this.props.canPrev} onClick={() => {
-          this.props.loadItems(--this.props.page)
+          this.props.loadItems(this.props.page-1)
         }}>
           Prev
         </button>
@@ -45,11 +46,14 @@ export default connect(
     query: state.pivasik.filterQuery
   }),
   dispatch => ({
-    loadItems: (page) => dispatch(loadItems(page)),
-    loadFilteredItems: (page, query) => dispatch(loadFilteredItems(page)),
+    loadItems: (page) => dispatch(loadItems(page,LOAD_ITEMS)),
+    loadFilteredItems: (page) => dispatch(loadItems(page,LOAD_FILTERED_ITEMS)),
 
     clearFilter: () => {
       dispatch({ type: CLEAR_FILTER })
     },
+    randomBeer: ()=>{
+      dispatch(loadRandomItem());
+    }
   })
 )(App);

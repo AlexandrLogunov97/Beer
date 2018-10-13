@@ -1,4 +1,4 @@
-import { LOAD_ITEMS, LOAD_FILTERED_ITEMS, LOAD_RANDOM_ITEM, PREV_PAGE, NEXT_PAGE,FILTER_VALUE_CHANGE,CLEAR_FILTER,CREATE_FILTER,SET_PAGE } from './actions'
+import * as actions from './actions'
 
 const initialState = {
     items: [],
@@ -6,30 +6,28 @@ const initialState = {
     canPrev: true,
     canNext: true,
     filter: [],
-    filterQuery:'',
+    filterQuery: '',
+    selectedItem: {},
+    modalState: false,
     mode: 'items'
 }
 export default function pivasik(state = initialState, action) {
-
     switch (action.type) {
-        case LOAD_ITEMS: {
+        case actions.LOAD_ITEMS: {
             return Object.assign({}, state, {
                 items: action.items,
                 canPrev: true,
                 canNext: true
             });
         }
-        case LOAD_FILTERED_ITEMS: {
+        case actions.LOAD_FILTERED_ITEMS: {
             return Object.assign({}, state, {
                 items: action.items,
-                canPrev: action.canPrev,
-                canNext: action.canNext
+                canPrev: true,
+                canNext: true
             });
         }
-        case LOAD_RANDOM_ITEM: {
-            return action.randomItem;
-        }
-        case PREV_PAGE: {
+        case actions.PREV_PAGE: {
             let page = state.page;
             if (page > 1)
                 page--;
@@ -39,7 +37,7 @@ export default function pivasik(state = initialState, action) {
                 canNext: false
             });
         }
-        case NEXT_PAGE: {
+        case actions.NEXT_PAGE: {
 
             let page = state.page;
             page++;
@@ -49,91 +47,113 @@ export default function pivasik(state = initialState, action) {
                 canNext: false
             });
         }
-        case CLEAR_FILTER:{
-            let values=[...state.filter];
-            values[0]={
+        case actions.CLEAR_FILTER: {
+            let values = [...state.filter];
+            values[0] = {
                 name: 'abv_gt',
                 value: ''
             };
-            values[1]={
+            values[1] = {
                 name: 'abv_lt',
                 value: ''
             };
-            values[2]={
+            values[2] = {
                 name: 'ibu_gt',
                 value: ''
             };
-            values[3]={
+            values[3] = {
                 name: 'ibu_lt',
                 value: ''
             };
-            values[4]={
+            values[4] = {
                 name: 'ebc_gt',
                 value: ''
             };
-            values[5]={
+            values[5] = {
                 name: 'ebc_lt',
                 value: ''
             };
-            values[6]={
+            values[6] = {
                 name: 'beer_name',
                 value: ''
             };
-            values[7]={
+            values[7] = {
                 name: 'yeast',
                 value: ''
             };
-            values[8]={
+            values[8] = {
                 name: 'brewed_before',
                 value: ''
             };
-            values[9]={
+            values[9] = {
                 name: 'brewed_after',
                 value: ''
             };
-            values[10]={
+            values[10] = {
                 name: 'hops',
                 value: ''
             };
-            values[11]={
+            values[11] = {
                 name: 'malt',
                 value: ''
             };
-            values[12]={
+            values[12] = {
                 name: 'food',
                 value: ''
             };
-            return Object.assign({},state,{
-                filter: values,
-                mode: 'items'
-            });
-        }
-        case FILTER_VALUE_CHANGE: {
-            let values=[...state.filter];
-            let element=values.find(x=> {return x.name===action.name? x: null});
-            values[values.indexOf(element)].value=action.value;
             return Object.assign({}, state, {
-               filter: values
+                filter: values,
+                filterQuery: ''
             });
         }
-        case CREATE_FILTER:{
-            let filterQuery='';
-            let filter=[...state.filter];
-            filter.forEach(node=>{
-                
-                if(node.value)
-                    filterQuery+=`&${node.name}=${node.value}`;
+        case actions.FILTER_VALUE_CHANGE: {
+            let values = [...state.filter];
+            let element = values.find(x => { return x.name === action.name ? x : null });
+            values[values.indexOf(element)].value = action.value;
+            return Object.assign({}, state, {
+                filter: values
             });
-            return Object.assign({},state,{
+        }
+        case actions.CREATE_FILTER: {
+            let filterQuery = '';
+            let filter = [...state.filter];
+            filter.forEach(node => {
+
+                if (node.value)
+                    filterQuery += `&${node.name}=${node.value}`;
+            });
+            if (filterQuery === '&')
+                filterQuery = '';
+            return Object.assign({}, state, {
                 filterQuery: filterQuery,
-                mode: 'filter'
-                
+                page: 1
             });
         }
-        case SET_PAGE:{
-            return Object.assign({}, state,{
+        case actions.SET_PAGE: {
+            return Object.assign({}, state, {
                 page: action.page
             });
+        }
+        case actions.SHOW_BEER: {
+            return Object.assign({}, state, {
+                selectedItem: action.beer,
+                modalState: true
+            });
+        }
+        case actions.HIDE_BEER: {
+            return Object.assign({}, state, {
+                modalState: false
+            });
+        }
+        case actions.LOAD_RANDOM_ITEM: {
+            console.log(action.beer);
+            return Object.assign({}, state, {
+                selectedItem: action.beer[0],
+                modalState: action.modal
+            });
+        }
+        default: {
+            break;
         }
     }
     return state;

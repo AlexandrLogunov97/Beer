@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {CLEAR_FILTER,FILTER_VALUE_CHANGE,CREATE_FILTER,loadFilteredItems} from '../reducers/actions';
+import {CLEAR_FILTER,FILTER_VALUE_CHANGE,CREATE_FILTER,loadFilteredItems, loadItems, LOAD_FILTERED_ITEMS, LOAD_ITEMS} from '../reducers/actions';
 import { connect } from "react-redux";
 
 class Filter extends Component {
@@ -23,8 +23,7 @@ class Filter extends Component {
                 <input placeholder='malt' name='malt' value={this.props.filter[11].value} onChange={this.filterValueChange}/>
                 <input placeholder='food' name='food' value={this.props.filter[12].value} onChange={this.filterValueChange}/>
                 <button onClick={()=>this.props.onClearFilter()}>Clear</button> <button onClick={()=>{
-                    this.props.onCreateFilter();
-                    this.props.loadFilteredItems(this.props.page,this.props.filterQuery);
+                    this.props.loadFilteredItems(this.props.page);
                 }}>Filter</button>
             </div>
         );
@@ -42,13 +41,13 @@ export default connect(
             dispatch({ type: FILTER_VALUE_CHANGE, name: name, value: value})
         },
         onClearFilter: ()=>{
-            dispatch({type: CLEAR_FILTER});
+            dispatch(loadItems(1,LOAD_ITEMS,CLEAR_FILTER));
         },
         onCreateFilter: ()=>{
             dispatch({type: CREATE_FILTER});
         } ,
-        loadFilteredItems: (page,filter)=>{
-            dispatch(loadFilteredItems(page,filter));
+        loadFilteredItems: (page)=>{
+            dispatch(loadItems(page,LOAD_FILTERED_ITEMS));
         }   
     })
 )(Filter);
