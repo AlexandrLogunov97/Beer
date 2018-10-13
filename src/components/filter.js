@@ -32,9 +32,9 @@ class Filter extends Component {
 
 export default connect(
     state => ({
-        filter: state.pivasik.filter,
+        filter: state.filter.filter,
         page: state.pivasik.page,
-        filterQuery: state.pivasik.filterQuery
+        filterQuery: state.filter.filterQuery
     }),
     dispatch => ({
         onFilterFieldValueChange: (name,value)=>{

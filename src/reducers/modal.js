@@ -16,8 +16,15 @@ export default function modal(state = initialState, action) {
                 modalState: false
             });
         }
+        case actions.LOAD_RANDOM_ITEM: {
+            return Object.assign({}, state, {
+                selectedItem: action.beer[0],
+                modalState: action.modal
+            });
+        }
         default:{
             break;
         }
     }
+    return state;
 }

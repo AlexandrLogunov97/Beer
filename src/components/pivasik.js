@@ -36,8 +36,8 @@ class Pivasik extends Component {
 
 export default connect(
   state => ({
-    beer: state.pivasik.selectedItem,
-    modalState: state.pivasik.modalState
+    beer: state.modal.selectedItem,
+    modalState: state.modal.modalState
   }),
   dispatch => ({
     onSelect: (beer) => {

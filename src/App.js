@@ -41,7 +41,7 @@ export default connect(
     page: state.pivasik.page,
     canPrev: state.pivasik.canPrev,
     canNext: state.pivasik.canNext,
-    query: state.pivasik.filterQuery
+    query: state.filter.filterQuery
   }),
   dispatch => ({
     loadItems: (page) => dispatch(loadItems(page,LOAD_ITEMS)),

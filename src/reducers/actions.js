@@ -19,7 +19,7 @@ export const loadItems = (page, mode, options) => {
         if (options===CLEAR_FILTER)
             dispatch({ type: CLEAR_FILTER });
         const state = getState();
-        fetch(`https://api.punkapi.com/v2/beers?page=${state.pivasik.page}${state.pivasik.filterQuery}`)
+        fetch(`https://api.punkapi.com/v2/beers?page=${state.pivasik.page}${state.filter.filterQuery}`)
             .then(response => response.json())
             .then(data => {
                 dispatch({ type: mode, items: data, canPrev: true, canNext: true })
