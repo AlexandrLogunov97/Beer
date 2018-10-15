@@ -1,8 +1,6 @@
 export const LOAD_ITEMS = 'LOAD_ITEMS';
 export const LOAD_RANDOM_ITEM = 'LOAD_RANDOM_ITEM';
 export const LOAD_FILTERED_ITEMS = 'LOAD_FILTERED_ITEMS';
-export const NEXT_PAGE = 'NEXT_PAGE';
-export const PREV_PAGE = 'PREV_PAGE';
 export const FILTER_VALUE_CHANGE = 'FILTER_VALUE_CHANGE';
 export const CLEAR_FILTER = 'CLEAR_FILTER';
 export const CREATE_FILTER = 'CREATE_FILTER';

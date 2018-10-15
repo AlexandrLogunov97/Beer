@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {CLEAR_FILTER,FILTER_VALUE_CHANGE,CREATE_FILTER,loadFilteredItems, loadItems, LOAD_FILTERED_ITEMS, LOAD_ITEMS} from '../reducers/actions';
+import {CLEAR_FILTER,FILTER_VALUE_CHANGE,CREATE_FILTER, loadItems, LOAD_FILTERED_ITEMS, LOAD_ITEMS} from '../reducers/actions';
 import { connect } from "react-redux";
 
 class Filter extends Component {
