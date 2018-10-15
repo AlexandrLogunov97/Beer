@@ -37,7 +37,7 @@ class Pivasik extends Component {
             {
                 this.props.beer.ingredients? this.props.beer.ingredients.malt?this.props.beer.ingredients.malt.map((x,index)=>(
                 <React.Fragment>
-                  <label>  {index + 1}. Name: {x.name}, amount: (value: {x.amount.value}, unit: {x.amount.unit}) </label><br />
+                  <label key={index}>  {index + 1}. Name: {x.name}, amount: (value: {x.amount.value}, unit: {x.amount.unit}) </label><br />
                 </React.Fragment>
                 )):'Empty':'Empty'
             }
@@ -45,7 +45,7 @@ class Pivasik extends Component {
             {
                 this.props.beer.ingredients? this.props.beer.ingredients.hops?this.props.beer.ingredients.hops.map((x,index)=>(
                 <React.Fragment>
-                  <label>  {index + 1}. Name: {x.name}, amount: (value: {x.amount.value}, unit: {x.amount.unit}), {x.add}, {x.attribute}</label><br />
+                  <label key={index}>  {index + 1}. Name: {x.name}, amount: (value: {x.amount.value}, unit: {x.amount.unit}), {x.add}, {x.attribute}</label><br />
                 </React.Fragment>
                 )):'Empty':'Empty'
             } 
@@ -56,7 +56,7 @@ class Pivasik extends Component {
             {
               this.props.beer.food_pairing ? this.props.beer.food_pairing.map((x, index) => (
                 <React.Fragment>
-                  <label>  {index + 1}. {x}</label><br />
+                  <label key={index}>  {index + 1}. {x}</label><br />
                 </React.Fragment>
               )) : 'Empty'
             }
@@ -65,7 +65,7 @@ class Pivasik extends Component {
             {
               this.props.beer.method?this.props.beer.method.mash_temp?this.props.beer.method.mash_temp.map((x,index)=>(
                 <React.Fragment>
-                  <label>{index+1}. temp (value: {x.temp.value}, unit: {x.temp.unit}), duration: {x.duration}</label><br/>
+                  <label key={index}>{index+1}. temp (value: {x.temp.value}, unit: {x.temp.unit}), duration: {x.duration}</label><br/>
                 </React.Fragment>
               )):'Empty':'Empty'
             }
