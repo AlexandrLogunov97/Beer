@@ -3,29 +3,32 @@ import * as actions from './actions'
 const initialState = {
     items: [],
     page: 1,
-    canPrev: true,
+    canPrev: false,
     canNext: true
 }
 export default function pivasik(state = initialState, action) {
     switch (action.type) {
         case actions.LOAD_ITEMS: {
+            let canPrev=state.page===1?false:true;
             return Object.assign({}, state, {
                 items: action.items,
-                canPrev: true,
+                canPrev: canPrev,
                 canNext: true
             });
         }
         case actions.LOAD_FILTERED_ITEMS: {
+            let canPrev=state.page===1?false:true;
             return Object.assign({}, state, {
                 items: action.items,
-                canPrev: true,
+                canPrev: canPrev,
                 canNext: true
             });
         }
         case actions.SET_PAGE: {
+            let canPrev=action.page===1?false:true;
             return Object.assign({}, state, {
                 page: action.page,
-                canPrev: false,
+                canPrev: canPrev,
                 canNext: false
             });
         }
